@@ -56,7 +56,6 @@ namespace Supermarket
                 index = random.Next(1, stock.stockProductList.Count);
                 buyer.buyerProductList.Add(stock.stockProductList[index]);
             }
-
             return buyer;
         }
 
@@ -81,10 +80,10 @@ namespace Supermarket
             // PrintShopProduct();
 
             CreateBuyerList();
-            Buy();
+            BuyProduct();
         }
 
-        public void Buy()
+        public void BuyProduct()
         {
 
         }
