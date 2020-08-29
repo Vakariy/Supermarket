@@ -8,6 +8,7 @@ namespace Supermarket
     {
         public List<Product> prodactListShop = new List<Product>();
         public List<Buyer> buyerList = new List<Buyer>();
+        public Stock stock = new Stock();
 
         public DateTime dateInShop;
 
