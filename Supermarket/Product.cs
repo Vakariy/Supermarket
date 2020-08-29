@@ -10,14 +10,16 @@ public class Product
         public int price;
         public int quantity;
 
-        // Вес продуктв в грамммах, нужен для полок.
+        // Вес продуктв в граммах, нужен для полок.
         public int weight;
+
+        // Номер полки, в зависимости от веса.
+        public int numberShelf;
 
         // Срок годности в днях.
         public int daysStored;
 
-        // День началао хранения.
-        public DateTime dateStartStored;
-
+        // День начала хранения.
+        public DateTime dateStartStored;     
     }
 }
