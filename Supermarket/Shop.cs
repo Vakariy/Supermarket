@@ -70,17 +70,24 @@ namespace Supermarket
                 buyerList.Add(buyer);
                 //Это проверка. Закомментировать buyer.PrintInfoBuyer
                 buyer.PrintInfoBuyer();
-            }    
+            }
         }
 
         public void Start()
         {
             FirstDelivery();
-           // Показать наличие продуктов в супермеркете.
-           // PrintShopProduct();
-           
+
+            // Показать наличие продуктов в супермеркете.
+            // PrintShopProduct();
+
             CreateBuyerList();
+            Buy();
+        }
+
+        public void Buy()
+        {
 
         }
+
     }
 }
