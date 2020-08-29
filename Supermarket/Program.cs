@@ -6,7 +6,9 @@ namespace Supermarket
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Console.WriteLine("Welcome to our supermarket!");
+            Shop supermarket = new Shop();
+            supermarket.Start();
         }
     }
 }
