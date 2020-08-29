@@ -42,7 +42,7 @@ namespace Supermarket
             }
         }
 
-        public void CreateListProductForOneBuyer()
+        public Buyer CreateListProductForOneBuyer()
         {
             Buyer buyer = new Buyer();
             // В списке у каждого покупателя 3 товара
@@ -57,31 +57,30 @@ namespace Supermarket
                 buyer.buyerProductList.Add(stock.stockProductList[index]);
             }
 
-            // Закоментировать печать этого метода
-            Console.WriteLine("************************");
-            Console.WriteLine("List Prodacts for 1 buyer:");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine($"My purse:{buyer.purse} grn");
+            return buyer;
+        }
 
-            for (int k = 0; k < buyer.buyerProductList.Count; k++)
+        public void CreateBuyerList()
+        {
+            int queue = 16;
+            Buyer buyer = new Buyer();
+            for (int i = 0; i < queue; i++)
             {
-                Console.WriteLine($"{k+1} {buyer.buyerProductList[k].name}");
-            }
-            Console.WriteLine("-------------------------");
-            //
+                buyer = CreateListProductForOneBuyer();
+                buyerList.Add(buyer);
+                //Это проверка. Закомментировать buyer.PrintInfoBuyer
+                buyer.PrintInfoBuyer();
+            }    
         }
 
         public void Start()
         {
             FirstDelivery();
-
-            // Показать наличие продуктов в супермеркете.
-            PrintShopProduct();
-
-            CreateListProductForOneBuyer();
+           // Показать наличие продуктов в супермеркете.
+           // PrintShopProduct();
+           
+            CreateBuyerList();
 
         }
-
-
     }
 }
