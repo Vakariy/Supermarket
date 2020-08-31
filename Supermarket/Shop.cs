@@ -6,12 +6,14 @@ namespace Supermarket
 {
     public class Shop
     {
+        public List<Product> buyerProductList;
         public List<Product> productListShop = new List<Product>();
         public List<Buyer> buyerList = new List<Buyer>();
         public Stock stock = new Stock();
         
         public DateTime dateInShop; // 2 клиента + 1 день
 
+        //первая загрузка стелажей в торговом зале со склада
         public void FirstDelivery()
         {
             Random random = new Random();
@@ -23,15 +25,16 @@ namespace Supermarket
             }
         }
 
-
+        //вывод продукции на полках магазина в разрезе стеллажей
         public void PrintShopProduct()
         {
             Console.WriteLine("--Print catalog products of supermarket--");
+            Console.ForegroundColor = ConsoleColor.Yellow; // устанавливаем 
             Console.WriteLine("_____________Shelf 1________________");
 
             foreach (var item in productListShop)
             {
-               
+                
                 if (item.numberShelf == 1)
                 {
                     Console.WriteLine("------------------------");
@@ -86,9 +89,10 @@ namespace Supermarket
                 }
             }
             Console.WriteLine("_____________________________");
+            Console.ResetColor(); // сбрасываем в стандартный
         }
         
-
+        //создание списка покупок для клиента в очереди
         public Buyer CreateListProductForOneBuyer()
         {
             Buyer buyer = new Buyer();
@@ -100,39 +104,26 @@ namespace Supermarket
 
             for (int i = 0; i < myProductList; i++)
             {
-                index = random.Next(1, stock.stockProductList.Count);
+                index = random.Next(0, stock.stockProductList.Count);
                 buyer.buyerProductList.Add(stock.stockProductList[index]);
             }
             return buyer;
         }
 
-        //public void CreateBuyerList()
-        //{
-        //    int queue = 16;
-        //    Buyer buyer = new Buyer();
-        //    for (int i = 0; i < queue; i++)
-        //    {
-        //        buyer = CreateListProductForOneBuyer();
-        //        buyerList.Add(buyer);
-        //        //Это проверка. Закомментировать buyer.PrintInfoBuyer
-        //        buyer.PrintInfoBuyer();
-        //    }
-        //} старый код, новый снизу
+        
 
+        //точка входа в создание клиента в очереди
         public void CreateBuyerList()
         {
             Buyer buyer = new Buyer();
             buyer = CreateListProductForOneBuyer();
             buyerList.Add(buyer);
-            //Это проверка. Закомментировать buyer.PrintInfoBuyer
-            buyer.PrintInfoBuyer();
+            
+            buyer.GenerationCheckForBayer();
         }
 
-        //public void BuyProduct()
-        //{
-
-        //}
-
+        
+        //выбор пользователя
         public void Choice()
         {
             int choise;
@@ -157,16 +148,43 @@ namespace Supermarket
         }
 
        
-
+        // вызов с главного класса
         public void Start()
         {
             FirstDelivery(); //загрузить продукты со склада
             PanelManager(); // метод для сценария и пользовательского взаимодействия
-
-            // Показать наличие продуктов в супермеркете.
-            // PrintShopProduct();
         }
 
+        //метод проверки остатков на полках в торговом зале. Если пусто, то заполнить товаром со склада
+        public void CheckStock()
+        {
+            int id = 0;
+            foreach (var item in productListShop)
+            {
+                if (item.quantity > 0)
+                {
+                    id++;
+                }
+            }
+
+            if (id == 0)
+            {
+                Console.ForegroundColor = ConsoleColor.Blue; // устанавливаем цвет
+                Console.WriteLine();
+                Console.WriteLine("Products in supermarket is stock out!");
+                Console.WriteLine("Acceptance of goods...");
+                Console.WriteLine();
+                Console.WriteLine("Key Enter for download products from stock to at shop shelf...");
+                Console.ReadKey();
+                Console.Clear();
+                Console.WriteLine("New delivery of products!!!");
+                FirstDelivery();
+                Console.WriteLine();
+                Console.ResetColor(); // сбрасываем в стандартный
+            }
+        }
+
+        //сценарий и взаимодействие с пользователем
         public void PanelManager()
         {
             while (true)
@@ -174,7 +192,8 @@ namespace Supermarket
                 PrintShopProduct();
                 Choice();
                 CreateBuyerList();
-               // BuyProduct();
+                CheckStock();
+               
             }
         }
     }
