@@ -6,10 +6,10 @@ namespace Supermarket
 {
     public class Shop
     {
-        public List<Product> prodactListShop = new List<Product>();
+        public List<Product> productListShop = new List<Product>();
         public List<Buyer> buyerList = new List<Buyer>();
         public Stock stock = new Stock();
-        int id = 2 \2 = 1;
+        
         public DateTime dateInShop; // 2 клиента + 1 день
 
         public void FirstDelivery()
@@ -18,8 +18,8 @@ namespace Supermarket
             // Загрузка со склада.
             for (int i = 0; i < stock.stockProductList.Count; i++)
             {
-                prodactListShop.Add(stock.stockProductList[i]);
-                prodactListShop[i].quantity = random.Next(3, 5);
+                productListShop.Add(stock.stockProductList[i]);
+                productListShop[i].quantity = random.Next(3, 5);
             }
         }
 
@@ -29,7 +29,7 @@ namespace Supermarket
             Console.WriteLine("--Print catalog products of supermarket--");
             Console.WriteLine("_____________Shelf 1________________");
 
-            foreach (var item in prodactListShop)
+            foreach (var item in productListShop)
             {
                
                 if (item.numberShelf == 1)
@@ -50,7 +50,7 @@ namespace Supermarket
             Console.WriteLine();
             Console.WriteLine("_____________Shelf 2________________");
 
-            foreach (var item in prodactListShop)
+            foreach (var item in productListShop)
             {
                 if (item.numberShelf == 2)
                 {
@@ -69,7 +69,7 @@ namespace Supermarket
             Console.WriteLine("____________________________________");
 
             Console.WriteLine("_____________Shelf 3________________");
-            foreach (var item in prodactListShop)
+            foreach (var item in productListShop)
             {
                 if (item.numberShelf == 3)
                 {
@@ -163,20 +163,12 @@ namespace Supermarket
             FirstDelivery(); //загрузить продукты со склада
             PanelManager(); // метод для сценария и пользовательского взаимодействия
 
-
-
-
-
             // Показать наличие продуктов в супермеркете.
             // PrintShopProduct();
-
-
-
         }
 
         public void PanelManager()
         {
-
             while (true)
             {
                 PrintShopProduct();
@@ -185,6 +177,5 @@ namespace Supermarket
                // BuyProduct();
             }
         }
-
     }
 }
