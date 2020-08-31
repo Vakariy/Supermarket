@@ -12,7 +12,7 @@ namespace Supermarket
         public Stock stock = new Stock();
         int daysInshop = 0;
 
-        public DateTime dateInShop =  DateTime.Now; // 2 клиента + 1 день
+        public DateTime dateInShop = DateTime.Now; // 2 клиента + 1 день
 
         //первая загрузка стелажей в торговом зале со склада
         public void FirstDelivery()
@@ -36,14 +36,14 @@ namespace Supermarket
         //вывод продукции на полках магазина в разрезе стеллажей
         public void PrintShopProduct()
         {
-            
+
             Console.WriteLine("--Print catalog products of supermarket--");
             Console.ForegroundColor = ConsoleColor.Yellow; // устанавливаем 
             Console.WriteLine("_____________Shelf 1________________");
 
             foreach (var item in productListShop)
             {
-                
+
                 if (item.numberShelf == 1)
                 {
                     Console.WriteLine("------------------------");
@@ -100,7 +100,7 @@ namespace Supermarket
             Console.WriteLine("_____________________________");
             Console.ResetColor(); // сбрасываем в стандартный
         }
-        
+
         //создание списка покупок для клиента в очереди
         public Buyer CreateListProductForOneBuyer()
         {
@@ -119,21 +119,22 @@ namespace Supermarket
             return buyer;
         }
 
-        
+
 
         //точка входа в создание клиента в очереди
         public void CreateBuyerList()
         {
+
             Buyer buyer = new Buyer();
             buyer = CreateListProductForOneBuyer();
             buyerList.Add(buyer);
             daysInshop += buyer.GenerationCheckForBayer();
-            
+
         }
 
-        
+
         //выбор пользователя
-        public void Choice()
+        public int Choice()
         {
             int choise;
             for (; ; )
@@ -141,22 +142,17 @@ namespace Supermarket
                 do
                 {
                     Console.WriteLine("Do you want to buy some products?");
-                    Console.WriteLine("Yes - 1   |   No - 2(exit)");
+                    Console.WriteLine("Yes - 1   |   No - 2(Go to menu)");
                 } while (!int.TryParse(Console.ReadLine(), out choise));
                 if (choise >= 1 && choise <= 2)
                 {
                     break;
                 }
             }
-
-            if (choise == 1)
-            {
-                Console.WriteLine("List with products for buy: ");
-            } else if(choise == 2) { Environment.Exit(0); }
-           
+            return choise;
         }
 
-       
+
         // вызов с главного класса
         public void Start()
         {
@@ -192,7 +188,7 @@ namespace Supermarket
                 // Загрузка со склада.
                 for (int i = 0; i < stock.stockProductList.Count; i++)
                 {
-                    
+
                     productListShop[i].quantity = random.Next(3, 5);
                 }
 
@@ -203,59 +199,74 @@ namespace Supermarket
 
         public void CheckSrokGodnosti()
         {
-           
+
 
             foreach (Product item in productListShop)
             {
-                
-                if (item.dateStartStored.AddDays(item.daysStored) < dateInShop)
+
+                if (item.dateStartStored.AddDays(item.daysStored) < dateInShop && item.status == "OK")
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
                     Console.WriteLine("Product " + item.name + " has expired. Product has been deleted from shelf!");
                     Console.ResetColor(); // сбрасываем в стандартный
+                    item.status = "NON";
                     item.quantity = 0;
-                }
-            }
-            
-        }
-
-
-        public void SetTimeInShop()
-        {
-            
-            if (daysInshop % 2 == 0)
-            {
-                Console.WriteLine();
-                Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine(dateInShop = dateInShop.AddDays(1));
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine();
-                Console.ResetColor(); // сбрасываем в стандартный
-            } else if(daysInshop % 2 != 0)
-            {
-                Console.ForegroundColor = ConsoleColor.Magenta;
-                Console.WriteLine();
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine("Today is " + dateInShop);
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine();
-                Console.ResetColor(); // сбрасываем в стандартный
+                   
             }
         }
 
-        //сценарий и взаимодействие с пользователем
-        public void PanelManager()
+    }
+
+
+    public void SetTimeInShop()
+    {
+
+        if (daysInshop % 2 == 0)
         {
-            while (true)
-            {
-                PrintShopProduct();
-                Choice();
-                CreateBuyerList();
-                CheckStock();
-                SetTimeInShop();
-                CheckSrokGodnosti(); //доделать сг
-            }
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine(dateInShop = dateInShop.AddDays(1));
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine();
+            Console.ResetColor(); // сбрасываем в стандартный
+        }
+        else if (daysInshop % 2 != 0)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
+            Console.WriteLine();
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine("Today is " + dateInShop);
+            Console.WriteLine("---------------------------------------------");
+            Console.WriteLine();
+            Console.ResetColor(); // сбрасываем в стандартный
         }
     }
+
+    //сценарий и взаимодействие с пользователем
+    public void PanelManager()
+    {
+        int input;
+        while (true)
+        {
+            PrintShopProduct();
+            input = Choice();
+            switch (input)
+            {
+                case 1:
+
+                    CreateBuyerList();
+                    CheckStock();
+                    SetTimeInShop();
+                    CheckSrokGodnosti();
+                    break;
+                case 2:
+                    //statistika of day
+                    //statistika of week
+                    break;
+            }
+
+        }
+    }
+}
 }

@@ -9,6 +9,7 @@ public class Product
         public string name;
         public int price;
         public int quantity;
+        public string status = "OK"; //для срока годности
 
         // Вес продуктв в граммах, нужен для полок.
         public int weight;
