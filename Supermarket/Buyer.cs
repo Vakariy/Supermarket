@@ -4,12 +4,13 @@ using System.Text;
 
 namespace Supermarket
 {
-  public  class Buyer
+  public class Buyer
     {
 
         public List<Product> buyerProductList;
         Shop Shop = new Shop();
         public int purse; //кошелек
+        public int amountOfBuyers = 0;
 
         public Buyer()
         {
@@ -18,8 +19,9 @@ namespace Supermarket
             purse = random.Next(200, 500);
         }
 
+
         //генерация чека для покупателя
-        public void GenerationCheckForBayer()
+        public int GenerationCheckForBayer()
         {
             int summa = 0;
             Console.ForegroundColor = ConsoleColor.Green;
@@ -73,18 +75,21 @@ namespace Supermarket
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
                 Console.ResetColor(); // сбрасываем в стандартный
+                return 0;
 
             } else if (summa <= purse)
             {
                 Console.WriteLine();
                 Console.WriteLine("Thank you for buy! See you then.");
+                amountOfBuyers++;//------------
                 Console.WriteLine();
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
+                return 1;
                 //можно как фичу вывести рандомно предсказание в чеке
             }
+            return 0;
 
-            
         }
     }   
 }
