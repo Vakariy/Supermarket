@@ -7,7 +7,7 @@ namespace Supermarket
   public  class Buyer
     {
         public List<Product> buyerProductList;
-        //кошелек
+        
         public int purse; //кошелек
 
         public Buyer()
@@ -25,24 +25,40 @@ namespace Supermarket
             Console.WriteLine("-------------------------");
             Console.WriteLine($"My purse:{purse} grn");
 
-            for (int k = 0; k <buyerProductList.Count; k++)
+            for (int k = 0; k < buyerProductList.Count; k++)
             {
                 Console.WriteLine($"{k + 1} {buyerProductList[k].name}-{buyerProductList[k].price}");
-                summa += buyerProductList[k].price;
-                buyerProductList[k].quantity--;
+                
+
+                if (buyerProductList[k].quantity > 0)
+                {
+                    summa += buyerProductList[k].price;
+                    buyerProductList[k].quantity--;
+
+                } else if(buyerProductList[k].quantity < 1)
+                {
+                    Console.WriteLine();
+                    Console.WriteLine("Sorry Dear client!");
+                    Console.WriteLine("Product such as: " + buyerProductList[k].name + " out of stock!");
+                }
+                
             }
             Console.WriteLine($"Summa: {summa}");
             Console.WriteLine("-------------------------");
 
             if (summa > purse)
             {
-                Console.WriteLine("You haven't got money for buy this list of products.");
+                Console.WriteLine("You haven't got money for buy this list of products: ");
 
                 for (int k = 0; k < buyerProductList.Count; k++)
                 {
                     Console.WriteLine($"{k + 1} {buyerProductList[k].name}-{buyerProductList[k].price}");
                     summa += buyerProductList[k].price;
-                    buyerProductList[k].quantity++;
+                    if (buyerProductList[k].quantity >= 0 )
+                    {
+                        buyerProductList[k].quantity++;
+                    }
+                    
                 }
 
             } else if (summa <= purse)

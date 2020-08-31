@@ -39,10 +39,10 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    Console.WriteLine($"Weight     : {item.weight} gr");
-                    Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    Console.WriteLine($"Days stored: {item.daysStored} days");
-                    Console.WriteLine($"Date       : {item.dateStartStored}");
+                    //Console.WriteLine($"Weight     : {item.weight} gr");
+                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    //Console.WriteLine($"Days stored: {item.daysStored} days");
+                    //Console.WriteLine($"Date       : {item.dateStartStored}");
                     Console.WriteLine("------------------------");
                 }
             }
@@ -59,11 +59,11 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    Console.WriteLine($"Weight     : {item.weight} gr");
-                    Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    Console.WriteLine($"Days stored: {item.daysStored} days");
-                    Console.WriteLine($"Date       : {item.dateStartStored}");
-                    Console.WriteLine("------------------------");
+                    //Console.WriteLine($"Weight     : {item.weight} gr");
+                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    //Console.WriteLine($"Days stored: {item.daysStored} days");
+                    //Console.WriteLine($"Date       : {item.dateStartStored}");
+                    //Console.WriteLine("------------------------");
                 }
             }
             Console.WriteLine("____________________________________");
@@ -78,10 +78,10 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    Console.WriteLine($"Weight     : {item.weight} gr");
-                    Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    Console.WriteLine($"Days stored: {item.daysStored} days");
-                    Console.WriteLine($"Date       : {item.dateStartStored}");
+                    //Console.WriteLine($"Weight     : {item.weight} gr");
+                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    //Console.WriteLine($"Days stored: {item.daysStored} days");
+                    //Console.WriteLine($"Date       : {item.dateStartStored}");
                     Console.WriteLine("------------------------");
                 }
             }
@@ -128,10 +128,10 @@ namespace Supermarket
             buyer.PrintInfoBuyer();
         }
 
-        public void BuyProduct()
-        {
+        //public void BuyProduct()
+        //{
 
-        }
+        //}
 
         public void Choice()
         {
