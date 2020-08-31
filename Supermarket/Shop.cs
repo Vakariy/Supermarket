@@ -12,7 +12,7 @@ namespace Supermarket
         public Stock stock = new Stock();
         int daysInshop = 0;
 
-        public DateTime dateInShop = new DateTime(2020, 8, 20, 23, 30, 25); // 2 клиента + 1 день
+        public DateTime dateInShop =  DateTime.Now; // 2 клиента + 1 день
 
         //первая загрузка стелажей в торговом зале со склада
         public void FirstDelivery()
@@ -202,7 +202,7 @@ namespace Supermarket
                 Console.WriteLine();
                 Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
                 Console.WriteLine("---------------------------------------------");
-                Console.WriteLine(dateInShop.AddDays(daysInshop / 2));
+                Console.WriteLine(dateInShop = dateInShop.AddDays(1));
                 Console.WriteLine("---------------------------------------------");
                 Console.WriteLine();
                 Console.ResetColor(); // сбрасываем в стандартный
