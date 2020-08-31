@@ -51,10 +51,10 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    //Console.WriteLine($"Weight     : {item.weight} gr");
-                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    //Console.WriteLine($"Days stored: {item.daysStored} days");
-                    //Console.WriteLine($"Date       : {item.dateStartStored}");
+                    Console.WriteLine($"Weight     : {item.weight} gr");
+                    Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    Console.WriteLine($"Days stored: {item.daysStored} days");
+                    Console.WriteLine($"Date       : {item.dateStartStored}");
                     Console.WriteLine("------------------------");
                 }
             }
@@ -71,11 +71,11 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    //Console.WriteLine($"Weight     : {item.weight} gr");
-                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    //Console.WriteLine($"Days stored: {item.daysStored} days");
-                    //Console.WriteLine($"Date       : {item.dateStartStored}");
-                    //Console.WriteLine("------------------------");
+                    Console.WriteLine($"Weight     : {item.weight} gr");
+                    Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    Console.WriteLine($"Days stored: {item.daysStored} days");
+                    Console.WriteLine($"Date       : {item.dateStartStored}");
+                    Console.WriteLine("------------------------");
                 }
             }
             Console.WriteLine("____________________________________");
@@ -90,10 +90,10 @@ namespace Supermarket
                     Console.WriteLine($"Name       : {item.name}");
                     Console.WriteLine($"Price      : {item.price} grn");
                     Console.WriteLine($"Quantity   : {item.quantity}");
-                    //Console.WriteLine($"Weight     : {item.weight} gr");
-                    //Console.WriteLine($"Shelf      : {item.numberShelf}");
-                    //Console.WriteLine($"Days stored: {item.daysStored} days");
-                    //Console.WriteLine($"Date       : {item.dateStartStored}");
+                    Console.WriteLine($"Weight     : {item.weight} gr");
+                    Console.WriteLine($"Shelf      : {item.numberShelf}");
+                    Console.WriteLine($"Days stored: {item.daysStored} days");
+                    Console.WriteLine($"Date       : {item.dateStartStored}");
                     Console.WriteLine("------------------------");
                 }
             }
@@ -187,10 +187,36 @@ namespace Supermarket
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("New delivery of products!!!");
-                FirstDelivery();
+
+                Random random = new Random();
+                // Загрузка со склада.
+                for (int i = 0; i < stock.stockProductList.Count; i++)
+                {
+                    
+                    productListShop[i].quantity = random.Next(3, 5);
+                }
+
                 Console.WriteLine();
                 Console.ResetColor(); // сбрасываем в стандартный
             }
+        }
+
+        public void CheckSrokGodnosti()
+        {
+            DateTime temp = DateTime.Now;
+           
+            foreach (var item in productListShop)
+            {
+                
+                if (item.dateStartStored.AddDays(item.daysStored) > temp)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
+                    Console.WriteLine("Product " + item.name + " has expired. Product has been deleted from shelf!");
+                    Console.ResetColor(); // сбрасываем в стандартный
+                    item.quantity = 0;
+                }
+            }
+            
         }
 
 
@@ -228,6 +254,7 @@ namespace Supermarket
                 CreateBuyerList();
                 CheckStock();
                 SetTimeInShop();
+                //CheckSrokGodnosti();
             }
         }
     }

@@ -47,9 +47,7 @@ namespace Supermarket
                     Console.WriteLine("Sorry Dear client!");
                     Console.WriteLine("Product such as: " + buyerProductList[k].name + " out of stock!");
                     Console.ResetColor(); // сбрасываем в стандартный
-
                 }
-                
             }
 
             Console.WriteLine($"Summa: {summa}");
