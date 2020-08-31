@@ -27,14 +27,14 @@ public class Product
         {
             this.name = name;
             this.price = price;
-            quantity=1;
+            quantity = 1;
 
             this.weight = weight;
-            if (weight > 0 && weight <500)
+            if (weight > 0 && weight < 500)
             {
                 numberShelf = 1;
             }
-           else if (weight >= 500 && weight <= 1000)
+            else if (weight >= 500 && weight <= 1000)
             {
                 numberShelf = 2;
             }
@@ -44,7 +44,7 @@ public class Product
             }
 
             this.daysStored = daysStored;
-            this.dateStartStored= DateTime.Now;
+            this.dateStartStored = DateTime.Now;
         }
     }
 }
