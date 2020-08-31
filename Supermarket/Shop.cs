@@ -203,12 +203,12 @@ namespace Supermarket
 
         public void CheckSrokGodnosti()
         {
-            DateTime temp = DateTime.Now;
            
-            foreach (var item in productListShop)
+
+            foreach (Product item in productListShop)
             {
                 
-                if (item.dateStartStored.AddDays(item.daysStored) > temp)
+                if (item.dateStartStored.AddDays(item.daysStored) < dateInShop)
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
                     Console.WriteLine("Product " + item.name + " has expired. Product has been deleted from shelf!");
@@ -254,7 +254,7 @@ namespace Supermarket
                 CreateBuyerList();
                 CheckStock();
                 SetTimeInShop();
-                //CheckSrokGodnosti();
+                CheckSrokGodnosti(); //доделать сг
             }
         }
     }

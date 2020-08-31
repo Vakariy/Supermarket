@@ -79,13 +79,14 @@ namespace Supermarket
             {
                 Console.WriteLine();
                 Console.WriteLine("Thank you for buy! See you then.");
-                amountOfBuyers++;//------------
+                amountOfBuyers++;
                 Console.WriteLine();
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
                 return 1;
                 //можно как фичу вывести рандомно предсказание в чеке
             }
+           
             return 0;
 
         }
