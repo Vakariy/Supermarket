@@ -23,6 +23,8 @@ public class Product
         // День начала хранения.
         public DateTime dateStartStored;
 
+       
+
         public Product() { }
         public Product(string name, int price, int weight, int daysStored) 
         {

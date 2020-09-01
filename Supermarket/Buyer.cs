@@ -6,11 +6,13 @@ namespace Supermarket
 {
   public class Buyer
     {
-
+        
         public List<Product> buyerProductList;
-        Shop Shop = new Shop();
+        public List<Product> reliase = new List<Product>();
+        //Shop Shop = new Shop();
         public int purse; //кошелек
         public int amountOfBuyers = 0;
+        
 
         public Buyer()
         {
@@ -18,11 +20,12 @@ namespace Supermarket
             Random random = new Random();
             purse = random.Next(200, 500);
         }
-
+        
 
         //генерация чека для покупателя
         public int GenerationCheckForBayer()
         {
+            
             int summa = 0;
             Console.ForegroundColor = ConsoleColor.Green;
             Console.WriteLine("************************");
@@ -39,6 +42,7 @@ namespace Supermarket
                 {
                     summa += buyerProductList[k].price;
                     buyerProductList[k].quantity--;
+                    reliase.Add(buyerProductList[k]);
 
                 } else if(buyerProductList[k].quantity < 1)
                 {
@@ -77,18 +81,34 @@ namespace Supermarket
 
             } else if (summa <= purse)
             {
+
+                AddStatistik();
                 Console.WriteLine();
                 Console.WriteLine("Thank you for buy! See you then.");
                 amountOfBuyers++;
                 Console.WriteLine();
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
-                return 1;
+                return 1; //для счета дней по реализациям чека
+
                 //можно как фичу вывести рандомно предсказание в чеке
             }
-           
             return 0;
+        }
 
+        public void AddStatistik()
+        {
+
+            for (int i = 0; i < reliase.Count; i++)
+            {
+                Registr registr = new Registr();
+                registr.day = Shop.dateInShop;
+                registr.name = reliase[i].name;
+                registr.quantity = reliase[i].quantity;
+                registr.price = reliase[i].price;
+                Statistics.statisticList.Add(registr);
+            }
         }
     }   
 }
+

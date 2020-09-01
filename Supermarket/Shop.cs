@@ -6,13 +6,15 @@ namespace Supermarket
 {
     public class Shop
     {
+        public Statistics statistics = new Statistics();
         public List<Product> buyerProductList;
         public List<Product> productListShop = new List<Product>();
         public List<Buyer> buyerList = new List<Buyer>();
         public Stock stock = new Stock();
         int daysInshop = 0;
 
-        public DateTime dateInShop = DateTime.Now; // 2 клиента + 1 день
+        // 2 клиента + 1 день
+        public static DateTime dateInShop = DateTime.Now; 
 
         //первая загрузка стелажей в торговом зале со склада
         public void FirstDelivery()
@@ -24,6 +26,7 @@ namespace Supermarket
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine();
             Console.ResetColor(); // сбрасываем в стандартный
+
             Random random = new Random();
             // Загрузка со склада.
             for (int i = 0; i < stock.stockProductList.Count; i++)
@@ -119,8 +122,6 @@ namespace Supermarket
             return buyer;
         }
 
-
-
         //точка входа в создание клиента в очереди
         public void CreateBuyerList()
         {
@@ -129,7 +130,6 @@ namespace Supermarket
             buyer = CreateListProductForOneBuyer();
             buyerList.Add(buyer);
             daysInshop += buyer.GenerationCheckForBayer();
-
         }
 
 
@@ -197,10 +197,9 @@ namespace Supermarket
             }
         }
 
+        //проверка срока годности
         public void CheckSrokGodnosti()
         {
-
-
             foreach (Product item in productListShop)
             {
 
@@ -213,11 +212,9 @@ namespace Supermarket
                     Console.ResetColor(); // сбрасываем в стандартный
                     item.status = "NON";
                     item.quantity = 0;
-                    
                 }
-        }
-
-    }
+            }   
+        }   
 
 
     public void SetTimeInShop()
@@ -228,6 +225,7 @@ namespace Supermarket
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
             Console.WriteLine("---------------------------------------------");
+            Console.Write("Today is ");
             Console.WriteLine(dateInShop = dateInShop.AddDays(1));
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine();
@@ -253,6 +251,7 @@ namespace Supermarket
         {
             PrintShopProduct();
             input = Choice();
+
             switch (input)
             {
                 case 1:
@@ -263,12 +262,41 @@ namespace Supermarket
                     CheckSrokGodnosti();
                     break;
                 case 2:
-                    //statistika of day
-                    //statistika of week
+                        Menu();
                     break;
             }
-
         }
     }
+
+        public void Menu()
+        {
+            int choise;
+            for (; ; )
+            {
+                do
+                {
+                    Console.WriteLine("What would you like do?");
+                    Console.WriteLine("1 - Go to supermarket   |   2 - Generation report in days   |   3 - Generation report in weeks");
+                } while (!int.TryParse(Console.ReadLine(), out choise));
+
+                if (choise >= 1 && choise <= 3)
+                {
+                    break;
+                }
+            }
+
+            switch (choise)
+            {
+                case 1:
+                    break;
+                case 2:
+                    statistics.AskStatisticDay();
+                    break;
+                case 3:
+                    statistics.PrintAllStatistic();
+                    break;
+            }
+        }
 }
 }
+
