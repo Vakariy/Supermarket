@@ -208,11 +208,13 @@ namespace Supermarket
                 {
                     Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
                     Console.WriteLine("Product " + item.name + " has expired. Product has been deleted from shelf!");
+                    Console.WriteLine("Key Enter for continue...");
+                    Console.ReadKey();
                     Console.ResetColor(); // сбрасываем в стандартный
                     item.status = "NON";
                     item.quantity = 0;
-                   
-            }
+                    
+                }
         }
 
     }
