@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Supermarket
 {
-public class Product
+    public class Product 
     {
         public string name;
         public int price;
@@ -22,8 +22,11 @@ public class Product
         // День начала хранения.
         public DateTime dateStartStored;
 
-        public Product() { }
-        public Product(string name, int price, int weight, int daysStored) 
+        public Product()
+        {
+            quantity = 1;
+        }
+        public Product(string name, int price, int weight, int daysStored)
         {
             this.name = name;
             this.price = price;
@@ -45,6 +48,17 @@ public class Product
 
             this.daysStored = daysStored;
             this.dateStartStored = DateTime.Now;
+        }
+
+        public Product(Product p)
+        {
+            this.name = p.name;
+            this.price = p.price;
+            this.quantity = p.quantity;
+            this.weight = p.weight;
+            this.numberShelf = p.numberShelf;
+            this.daysStored = p.daysStored;
+            this.dateStartStored = p.dateStartStored;
         }
     }
 }

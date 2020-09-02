@@ -10,6 +10,7 @@ namespace Supermarket
 
         public Stock()
         {
+            stockProductList = new List<Product>();
             // name, price,  weight, daysStored
             stockProductList.Add(new Product("Jogurt", 20, 300, 3));
             stockProductList.Add(new Product("Сroissant", 20, 100, 10));
@@ -23,6 +24,22 @@ namespace Supermarket
             stockProductList.Add(new Product("Pizza", 150, 1500, 1));
             stockProductList.Add(new Product("Watermelon", 60, 6000, 7));
             stockProductList.Add(new Product("Flour", 30, 2000, 60));
+        }
+
+        public void PrintStock ()
+        {
+            Console.WriteLine("==List product in Stock===");
+            foreach (var item in stockProductList)
+            {
+                Console.WriteLine("------------------------");
+                Console.WriteLine($"Shelf      : {item.numberShelf}");
+                Console.WriteLine($"Name       : {item.name}");
+                Console.WriteLine($"Price      : {item.price} grn");
+                Console.WriteLine($"Quantity   : {item.quantity}");
+             
+                Console.WriteLine("------------------------");
+            }
+            Console.WriteLine("==============================");
         }
     }
 }

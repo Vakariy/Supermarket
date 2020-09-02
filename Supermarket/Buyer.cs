@@ -4,11 +4,11 @@ using System.Text;
 
 namespace Supermarket
 {
-  public  class Buyer
+    public class Buyer
     {
         public List<Product> buyerProductList;
-        //кошелек
-        public int purse; //кошелек
+        // Кошелек
+        public int purse; 
 
         public Buyer()
         {
@@ -17,39 +17,68 @@ namespace Supermarket
             purse = random.Next(200, 500);
         }
 
-        public void PrintInfoBuyer()
+        public void GenerationCheck()
         {
-            int summa = 0;
-            Console.WriteLine("************************");
-            Console.WriteLine("List Products for 1 buyer:");
-            Console.WriteLine("-------------------------");
-            Console.WriteLine($"My purse:{purse} grn");
+            int summa=0;
+            Console.WriteLine("\n Seller: Here is your receipt\n");
 
-            for (int k = 0; k <buyerProductList.Count; k++)
+            Console.WriteLine("|=========S H O P=================");
+            Console.WriteLine("|=================================");
+            for (int i = 0; i < buyerProductList.Count; i++)
             {
-                Console.WriteLine($"{k + 1} {buyerProductList[k].name}-{buyerProductList[k].price}");
-                summa += buyerProductList[k].price;
-                buyerProductList[k].quantity--;
-            }
-            Console.WriteLine($"Summa: {summa}");
-            Console.WriteLine("-------------------------");
-
-            if (summa > purse)
-            {
-                Console.WriteLine("You haven't got money for buy this list of products.");
-
-                for (int k = 0; k < buyerProductList.Count; k++)
+                if (buyerProductList[i].quantity!=0)
                 {
-                    Console.WriteLine($"{k + 1} {buyerProductList[k].name}-{buyerProductList[k].price}");
-                    summa += buyerProductList[k].price;
-                    buyerProductList[k].quantity++;
+                    Console.WriteLine($"| {i+1}.{buyerProductList[i].name}..." +
+                   $"{buyerProductList[i].quantity}*{buyerProductList[i].price}" +
+                   $"={buyerProductList[i].quantity * buyerProductList[i].price}");
+                    summa += buyerProductList[i].quantity * buyerProductList[i].price;
                 }
+            }
+            Console.WriteLine("---------------------------------");
+            Console.WriteLine($"| TOTAL   - {summa}");
+            Console.WriteLine($"| You take - {purse}");
+            Console.WriteLine($"| Change   - {purse- summa}");
+            Console.WriteLine("| ===Thank for shopping here=======");
+        }
 
-            } else if (summa <= purse)
+        public void DisplayBuyer()
+        {       
+            for (int k = 0; k < buyerProductList.Count; k++)
             {
-                Console.WriteLine("Thank you for buy! See you then.");
-                //можно как фичу вывести рандомно предсказание в чеке
+                Console.WriteLine($"{k + 1} {buyerProductList[k].name}- {buyerProductList[k].quantity}");           
             }
         }
-    }   
+
+        public bool CheckSumma()
+        {
+            bool hasMoney = false;
+            int summa = 0;
+                  Console.WriteLine(" Customer: Can i have some products, please...\n ");
+            for (int k = 0; k < buyerProductList.Count; k++)
+            {
+                if (buyerProductList[k].quantity!=0)
+                {
+                    summa += buyerProductList[k].quantity * buyerProductList[k].price;
+                    Console.WriteLine($"{k + 1}...{buyerProductList[k].name}");
+                }
+            }
+            Console.WriteLine($"\n Customer: How muth is it?");
+            Console.WriteLine($" Seller: Its {summa} grn");
+
+            if (purse>=summa)
+            {
+                hasMoney = true;
+                Console.WriteLine($" Customer: Take it {purse} grn");
+                Console.WriteLine($" Seller: Here is your change {purse-summa} grn");
+            }
+            else
+            {
+                Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
+                Console.WriteLine($" Customer: I have only {purse} grn");
+                Console.WriteLine(" Seller: You haven't got enought money for buy this list of products");
+                Console.ResetColor(); // сбрасываем в стандартный
+            }
+            return hasMoney;
+        }
+    }
 }
