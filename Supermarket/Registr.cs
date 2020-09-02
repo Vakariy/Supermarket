@@ -7,10 +7,7 @@ namespace Supermarket
     public class Registr
     {
         
-
-
-        public DateTime day;
-        //  public Product product;
+        public DateTime day;   
         public string name;
         public int quantity;
         public int price;

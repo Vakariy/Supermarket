@@ -24,9 +24,8 @@ namespace Supermarket
                     pieses++;
                     money += statisticList[i].price;
                 }
-                Console.WriteLine($"pieses- {pieses}");
-                Console.WriteLine($"money- {money}");
-
+                Console.WriteLine($"pieses- {pieses} pcs");
+                Console.WriteLine($"money- {money} grn");
             }
             Console.WriteLine();
             Console.WriteLine("==========================");
@@ -35,32 +34,14 @@ namespace Supermarket
             Console.ReadKey();
         }
 
-
         public void AskStatisticDay()
         {
             DateTime dtOut;
             DateTime time = DateTime.Now;
 
-
-            //Console.WriteLine("Choise number of day");
-            //for (int i = 0; i < statisticList.Count; i++)
-            //{
-            //    if (statisticList[i].day == time)
-            //    {
-            //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-            //        Console.WriteLine("---");
-            //    }
-
-            //    if (statisticList[i].day == time.AddDays(1))
-            //    {
-            //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-            //        Console.WriteLine("---");
-            //    }
-            //}
-
             while (!DateTime.TryParse(Console.ReadLine(), out dtOut))
             {
-                Console.WriteLine("Введите дату в формате: {0:d}", new DateTime(2008, 1, 7));
+                Console.WriteLine("Input date in format like: {0:d}", new DateTime(2008, 1, 7));
             }
             PrintStatisticDay(dtOut);
         }
@@ -71,7 +52,7 @@ namespace Supermarket
             {
                 if (statisticList[i].day == dtOut)
                 {
-                    Console.WriteLine($"Day: {statisticList[i].day}-{statisticList[i].name}");
+                    Console.WriteLine(statisticList[i].name);
                 }
             }
         }

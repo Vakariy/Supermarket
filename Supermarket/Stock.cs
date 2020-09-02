@@ -8,7 +8,7 @@ namespace Supermarket
     {
         public List<Product> stockProductList = new List<Product>();
 
-        public Stock()
+        public void StockSet()
         {
             // name, price,  weight, daysStored
             stockProductList.Add(new Product("Jogurt", 20, 300, 3));

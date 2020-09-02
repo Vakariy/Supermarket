@@ -12,23 +12,14 @@ namespace Supermarket
         public List<Buyer> buyerList = new List<Buyer>();
         public Stock stock = new Stock();
         int daysInshop = 0;
-
-        // 2 клиента + 1 день
         public static DateTime dateInShop = DateTime.Now; 
 
-        //первая загрузка стелажей в торговом зале со склада
+        //загрузка стелажей в торговый зал со склада
         public void FirstDelivery()
         {
-            Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
+             stock.StockSet();
             Console.WriteLine();
-            //Console.WriteLine("---------------------------------------------");
-            //Console.WriteLine(dateInShop);
-            //Console.WriteLine("---------------------------------------------");
-            Console.WriteLine();
-            Console.ResetColor(); // сбрасываем в стандартный
-
-            Random random = new Random();
-            // Загрузка со склада.
+            Random random = new Random();            
             for (int i = 0; i < stock.stockProductList.Count; i++)
             {
                 productListShop.Add(stock.stockProductList[i]);
@@ -41,7 +32,7 @@ namespace Supermarket
         {
 
             Console.WriteLine("--Print catalog products of supermarket--");
-            Console.ForegroundColor = ConsoleColor.Yellow; // устанавливаем 
+            Console.ForegroundColor = ConsoleColor.Yellow; 
             Console.WriteLine("_____________Shelf 1________________");
 
             foreach (var item in productListShop)
@@ -101,16 +92,14 @@ namespace Supermarket
                 }
             }
             Console.WriteLine("_____________________________");
-            Console.ResetColor(); // сбрасываем в стандартный
+            Console.ResetColor(); 
         }
 
         //создание списка покупок для клиента в очереди
         public Buyer CreateListProductForOneBuyer()
         {
             Buyer buyer = new Buyer();
-            // В списке у каждого покупателя 3 товара
             int myProductList = 3;
-
             Random random = new Random();
             int index = 0;
 
@@ -151,14 +140,6 @@ namespace Supermarket
             return choise;
         }
 
-
-        // вызов с главного класса
-        public void Start()
-        {
-            FirstDelivery(); //загрузить продукты со склада
-            PanelManager(); // метод для сценария и пользовательского взаимодействия
-        }
-
         //метод проверки остатков на полках в торговом зале. Если пусто, то заполнить товаром со склада
         public void CheckStock()
         {
@@ -173,7 +154,7 @@ namespace Supermarket
 
             if (id == 0)
             {
-                Console.ForegroundColor = ConsoleColor.Blue; // устанавливаем цвет
+                Console.ForegroundColor = ConsoleColor.Blue; 
                 Console.WriteLine();
                 Console.WriteLine("Products in supermarket is stock out!");
                 Console.WriteLine("Acceptance of goods...");
@@ -182,17 +163,12 @@ namespace Supermarket
                 Console.ReadKey();
                 Console.Clear();
                 Console.WriteLine("New delivery of products!!!");
-
-                Random random = new Random();
-                // Загрузка со склада.
-                for (int i = 0; i < stock.stockProductList.Count; i++)
-                {
-
-                    productListShop[i].quantity = random.Next(3, 5);
-                }
-
                 Console.WriteLine();
-                Console.ResetColor(); // сбрасываем в стандартный
+                productListShop.Clear();
+                stock.stockProductList.Clear();
+                FirstDelivery();
+                Console.WriteLine();
+                Console.ResetColor();
             }
         }
 
@@ -201,34 +177,31 @@ namespace Supermarket
         {
             foreach (Product item in productListShop)
             {
-
                 if (item.dateStartStored.AddDays(item.daysStored) < dateInShop && item.status == "OK")
                 {
-                    Console.ForegroundColor = ConsoleColor.Red; // устанавливаем цвет
+                    Console.ForegroundColor = ConsoleColor.Red; 
                     Console.WriteLine("Product " + item.name + " has expired. Product has been deleted from shelf!");
                     Console.WriteLine("Key Enter for continue...");
                     Console.ReadKey();
-                    Console.ResetColor(); // сбрасываем в стандартный
+                    Console.ResetColor(); 
                     item.status = "NON";
                     item.quantity = 0;
                 }
             }   
         }   
 
-
     public void SetTimeInShop()
     {
-
         if (daysInshop % 2 == 0 && daysInshop != 0)
         {
             Console.WriteLine();
-            Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
+            Console.ForegroundColor = ConsoleColor.Magenta; 
             Console.WriteLine("---------------------------------------------");
             Console.Write("Today is ");
             Console.WriteLine(dateInShop = dateInShop.AddDays(1));
             Console.WriteLine("---------------------------------------------");
             Console.WriteLine();
-            Console.ResetColor(); // сбрасываем в стандартный
+            Console.ResetColor(); 
         }
         else if (daysInshop % 2 != 0 || daysInshop == 0)
         {
@@ -249,16 +222,14 @@ namespace Supermarket
         while (true)
         {
             PrintShopProduct();
-                SetTimeInShop();
-                input = Choice();
+            SetTimeInShop();
+            input = Choice();
 
             switch (input)
             {
                 case 1:
-
                     CreateBuyerList();
                     CheckStock();
-                   
                     CheckSrokGodnosti();
                     break;
                 case 2:
@@ -298,6 +269,13 @@ namespace Supermarket
                     break;
             }
         }
-}
+
+        // вызов с главного класса
+        public void Start()
+        {
+            FirstDelivery(); //загрузить продукты со склада
+            PanelManager(); // метод для сценария и пользовательского взаимодействия
+        }
+    }
 }
 

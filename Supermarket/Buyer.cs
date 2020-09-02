@@ -9,11 +9,9 @@ namespace Supermarket
         
         public List<Product> buyerProductList;
         public List<Product> reliase = new List<Product>();
-        //Shop Shop = new Shop();
-        public int purse; //кошелек
+        public int purse; 
         public int amountOfBuyers = 0;
         
-
         public Buyer()
         {
             buyerProductList = new List<Product>();
@@ -21,7 +19,6 @@ namespace Supermarket
             purse = random.Next(200, 500);
         }
         
-
         //генерация чека для покупателя
         public int GenerationCheckForBayer()
         {
@@ -47,10 +44,10 @@ namespace Supermarket
                 } else if(buyerProductList[k].quantity < 1)
                 {
                     Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Red; // устанавливаем 
+                    Console.ForegroundColor = ConsoleColor.Red;
                     Console.WriteLine("Sorry Dear client!");
                     Console.WriteLine("Product such as: " + buyerProductList[k].name + " out of stock!");
-                    Console.ResetColor(); // сбрасываем в стандартный
+                    Console.ResetColor(); 
                 }
             }
 
@@ -60,7 +57,7 @@ namespace Supermarket
 
             if (summa > purse)
             {
-                Console.ForegroundColor = ConsoleColor.Red; // устанавливаем 
+                Console.ForegroundColor = ConsoleColor.Red; 
                 Console.WriteLine("You haven't got money for buy this list of products: ");
 
                 for (int k = 0; k < buyerProductList.Count; k++)
@@ -76,7 +73,7 @@ namespace Supermarket
                 Console.WriteLine();
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
-                Console.ResetColor(); // сбрасываем в стандартный
+                Console.ResetColor(); 
                 return 0;
 
             } else if (summa <= purse)
@@ -89,16 +86,13 @@ namespace Supermarket
                 Console.WriteLine();
                 Console.WriteLine("Key Enter for continue...");
                 Console.ReadKey();
-                return 1; //для счета дней по реализациям чека
-
-                //можно как фичу вывести рандомно предсказание в чеке
+                return 1;  
             }
             return 0;
         }
 
         public void AddStatistik()
         {
-
             for (int i = 0; i < reliase.Count; i++)
             {
                 Registr registr = new Registr();

@@ -9,7 +9,7 @@ public class Product
         public string name;
         public int price;
         public int quantity;
-        public string status = "OK"; //для срока годности
+        public string status = "OK"; //для срока годности, если СГ истек, то статус = "NON"
 
         // Вес продуктв в граммах, нужен для полок.
         public int weight;
@@ -22,9 +22,7 @@ public class Product
 
         // День начала хранения.
         public DateTime dateStartStored;
-
-       
-
+     
         public Product() { }
         public Product(string name, int price, int weight, int daysStored) 
         {
@@ -47,7 +45,7 @@ public class Product
             }
 
             this.daysStored = daysStored;
-            this.dateStartStored = DateTime.Now;
+            this.dateStartStored = Shop.dateInShop;
         }
     }
 }
