@@ -38,62 +38,45 @@ namespace Supermarket
 
         public void AskStatisticDay()
         {
-            DateTime choiseNumber;
+            DateTime dtOut;
             DateTime time = DateTime.Now;
-            
-            if (statisticList.Count != 0)
+
+
+            //Console.WriteLine("Choise number of day");
+            //for (int i = 0; i < statisticList.Count; i++)
+            //{
+            //    if (statisticList[i].day == time)
+            //    {
+            //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
+            //        Console.WriteLine("---");
+            //    }
+
+            //    if (statisticList[i].day == time.AddDays(1))
+            //    {
+            //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
+            //        Console.WriteLine("---");
+            //    }
+            //}
+
+            while (!DateTime.TryParse(Console.ReadLine(), out dtOut))
             {
-                //Console.WriteLine("Choise number of day");
-                //for (int i = 0; i < statisticList.Count; i++)
-                //{
-                //    if (statisticList[i].day == time)
-                //    {
-                //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-                //        Console.WriteLine("---");
-                //    }
-
-                //    if (statisticList[i].day == time.AddDays(1))
-                //    {
-                //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-                //        Console.WriteLine("---");
-                //    }
-                //}
-
-                for (; ; )
-                {
-                    if (DateTime.TryParse(Console.ReadLine(), out choiseNumber) == true)
-                    {
-                        //if (choiseNumber > 0 && choiseNumber <= statisticList.Count)
-                        //{
-                        //    break;
-                        //}
-                        break;
-                    }
-                    else
-                    {
-                        Console.WriteLine("Incorrrect input");
-                    }
-                }
-
-                PrintStatisticDay(choiseNumber);
+                Console.WriteLine("Введите дату в формате: {0:d}", new DateTime(2008, 1, 7));
             }
-            else
-            {
-                Console.WriteLine($"We dont have statistic");
-            }
+            PrintStatisticDay(dtOut);
         }
 
-        public void PrintStatisticDay(DateTime choiseNumber)
+        public void PrintStatisticDay(DateTime dtOut)
         {
             for (int i = 0; i < statisticList.Count; i++)
             {
-                if (statisticList[i].day == choiseNumber)
+                if (statisticList[i].day == dtOut)
                 {
-                    Console.WriteLine($"Day: {statisticList[i].day}-{statisticList[i].name}-{statisticList[i].quantity}");
+                    Console.WriteLine($"Day: {statisticList[i].day}-{statisticList[i].name}");
                 }
             }
         }
     }
 }
+
 
 
