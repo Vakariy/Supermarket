@@ -13,7 +13,8 @@ namespace Supermarket
         {
             int pieses = 0;
             int money = 0;
-
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            Console.WriteLine();
             Console.WriteLine("===PrintAllStatistic====");
             if (statisticList.Count != 0)
             {
@@ -27,41 +28,46 @@ namespace Supermarket
                 Console.WriteLine($"money- {money}");
 
             }
+            Console.WriteLine();
             Console.WriteLine("==========================");
+            Console.WriteLine("Key Enter for continue...");
+            Console.ResetColor();
+            Console.ReadKey();
         }
 
 
         public void AskStatisticDay()
         {
-            int choiseNumber;
+            DateTime choiseNumber;
             DateTime time = DateTime.Now;
-            int index = 0;
+            
             if (statisticList.Count != 0)
             {
-                Console.WriteLine("Choise number of day");
-                for (int i = 0; i < statisticList.Count; i++)
-                {
-                    if (statisticList[i].day == time)
-                    {
-                        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-                        Console.WriteLine("---");
-                    }
+                //Console.WriteLine("Choise number of day");
+                //for (int i = 0; i < statisticList.Count; i++)
+                //{
+                //    if (statisticList[i].day == time)
+                //    {
+                //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
+                //        Console.WriteLine("---");
+                //    }
 
-                    if (statisticList[i].day == time.AddDays(1))
-                    {
-                        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
-                        Console.WriteLine("---");
-                    }
-                }
+                //    if (statisticList[i].day == time.AddDays(1))
+                //    {
+                //        Console.WriteLine($"{i + 1}. Day: {statisticList[i].day}");
+                //        Console.WriteLine("---");
+                //    }
+                //}
 
                 for (; ; )
                 {
-                    if (int.TryParse(Console.ReadLine(), out choiseNumber) == true)
+                    if (DateTime.TryParse(Console.ReadLine(), out choiseNumber) == true)
                     {
-                        if (choiseNumber > 0 && choiseNumber <= statisticList.Count)
-                        {
-                            break;
-                        }
+                        //if (choiseNumber > 0 && choiseNumber <= statisticList.Count)
+                        //{
+                        //    break;
+                        //}
+                        break;
                     }
                     else
                     {
@@ -77,11 +83,11 @@ namespace Supermarket
             }
         }
 
-        public void PrintStatisticDay(int choiseNumber)
+        public void PrintStatisticDay(DateTime choiseNumber)
         {
             for (int i = 0; i < statisticList.Count; i++)
             {
-                if (i == choiseNumber - 1)
+                if (statisticList[i].day == choiseNumber)
                 {
                     Console.WriteLine($"Day: {statisticList[i].day}-{statisticList[i].name}-{statisticList[i].quantity}");
                 }
@@ -89,3 +95,5 @@ namespace Supermarket
         }
     }
 }
+
+

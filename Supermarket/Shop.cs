@@ -21,9 +21,9 @@ namespace Supermarket
         {
             Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
             Console.WriteLine();
-            Console.WriteLine("---------------------------------------------");
-            Console.WriteLine(dateInShop);
-            Console.WriteLine("---------------------------------------------");
+            //Console.WriteLine("---------------------------------------------");
+            //Console.WriteLine(dateInShop);
+            //Console.WriteLine("---------------------------------------------");
             Console.WriteLine();
             Console.ResetColor(); // сбрасываем в стандартный
 
@@ -125,7 +125,6 @@ namespace Supermarket
         //точка входа в создание клиента в очереди
         public void CreateBuyerList()
         {
-
             Buyer buyer = new Buyer();
             buyer = CreateListProductForOneBuyer();
             buyerList.Add(buyer);
@@ -220,7 +219,7 @@ namespace Supermarket
     public void SetTimeInShop()
     {
 
-        if (daysInshop % 2 == 0)
+        if (daysInshop % 2 == 0 && daysInshop != 0)
         {
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Magenta; // устанавливаем цвет
@@ -231,7 +230,7 @@ namespace Supermarket
             Console.WriteLine();
             Console.ResetColor(); // сбрасываем в стандартный
         }
-        else if (daysInshop % 2 != 0)
+        else if (daysInshop % 2 != 0 || daysInshop == 0)
         {
             Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine();
@@ -250,7 +249,8 @@ namespace Supermarket
         while (true)
         {
             PrintShopProduct();
-            input = Choice();
+                SetTimeInShop();
+                input = Choice();
 
             switch (input)
             {
@@ -258,7 +258,7 @@ namespace Supermarket
 
                     CreateBuyerList();
                     CheckStock();
-                    SetTimeInShop();
+                   
                     CheckSrokGodnosti();
                     break;
                 case 2:
@@ -275,8 +275,9 @@ namespace Supermarket
             {
                 do
                 {
+                    Console.WriteLine();
                     Console.WriteLine("What would you like do?");
-                    Console.WriteLine("1 - Go to supermarket   |   2 - Generation report in days   |   3 - Generation report in weeks");
+                    Console.WriteLine("1 - Go to supermarket   |   2 - Generation report for one day  |   3 - Generation of the entire report by day");
                 } while (!int.TryParse(Console.ReadLine(), out choise));
 
                 if (choise >= 1 && choise <= 3)
