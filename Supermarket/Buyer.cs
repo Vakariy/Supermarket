@@ -22,23 +22,24 @@ namespace Supermarket
             int summa=0;
             Console.WriteLine("\n Seller: Here is your receipt\n");
 
-            Console.WriteLine("|=========S H O P=================");
-            Console.WriteLine("|=================================");
+            Console.WriteLine("| -----------S H O P--------------");
+            Console.WriteLine("| --------------------------------");
             for (int i = 0; i < buyerProductList.Count; i++)
             {
                 if (buyerProductList[i].quantity!=0)
                 {
-                    Console.WriteLine($"| {i+1}.{buyerProductList[i].name}..." +
+                    Console.WriteLine($"| {i+1}.{buyerProductList[i].name}___" +
                    $"{buyerProductList[i].quantity}*{buyerProductList[i].price}" +
                    $"={buyerProductList[i].quantity * buyerProductList[i].price}");
                     summa += buyerProductList[i].quantity * buyerProductList[i].price;
                 }
             }
-            Console.WriteLine("---------------------------------");
-            Console.WriteLine($"| TOTAL   - {summa}");
+            Console.WriteLine("| --------------------------------");
+            Console.WriteLine($"| TOTAL    - {summa}");
             Console.WriteLine($"| You take - {purse}");
             Console.WriteLine($"| Change   - {purse- summa}");
-            Console.WriteLine("| ===Thank for shopping here=======");
+            Console.WriteLine("| ---Thank for shopping here---");
+            Console.WriteLine("| --------------------------------");
         }
 
         public void DisplayBuyer()

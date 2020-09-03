@@ -28,7 +28,7 @@ namespace Supermarket
 
         public void PrintStock ()
         {
-            Console.WriteLine("==List product in Stock===");
+            Console.WriteLine("--List product in stock---");
             foreach (var item in stockProductList)
             {
                 Console.WriteLine("------------------------");
@@ -36,7 +36,10 @@ namespace Supermarket
                 Console.WriteLine($"Name       : {item.name}");
                 Console.WriteLine($"Price      : {item.price} grn");
                 Console.WriteLine($"Quantity   : {item.quantity}");
-             
+                //Console.WriteLine($"Weight     : {item.weight} gr");
+                Console.WriteLine($"Days stored: {item.daysStored} days");
+                Console.WriteLine($"Date       : {item.dateStartStored.ToShortDateString()}");
+
                 Console.WriteLine("------------------------");
             }
             Console.WriteLine("==============================");

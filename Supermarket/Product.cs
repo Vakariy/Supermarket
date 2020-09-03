@@ -60,5 +60,7 @@ namespace Supermarket
             this.daysStored = p.daysStored;
             this.dateStartStored = p.dateStartStored;
         }
+
+  
     }
 }
