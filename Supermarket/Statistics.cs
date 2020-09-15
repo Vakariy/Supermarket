@@ -48,13 +48,26 @@ namespace Supermarket
 
         public void PrintStatisticDay(DateTime dtOut)
         {
+            int pieses = 0;
+            int sum = 0;
+            Console.ForegroundColor = ConsoleColor.Yellow;
             for (int i = 0; i < statisticList.Count; i++)
             {
-                if (statisticList[i].day == dtOut)
+                if (statisticList[i].day.ToShortDateString() == dtOut.ToShortDateString())
                 {
-                    Console.WriteLine(statisticList[i].name);
+                    Console.WriteLine(statisticList[i].day + " " + statisticList[i].name);
+                    pieses++;
+                    sum += statisticList[i].price;
                 }
             }
+
+            Console.WriteLine("Pieses " + pieses);
+            Console.WriteLine("Sum " + sum + " uan.");
+            Console.WriteLine("==========================");
+            Console.WriteLine("Key Enter for continue...");
+            Console.ReadKey();
+            Console.ResetColor();
+
         }
     }
 }
